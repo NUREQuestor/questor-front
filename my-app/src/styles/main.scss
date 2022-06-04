@@ -1,0 +1,24 @@
+@import "base/normalize";
+@import "base/reset";
+@import "base/variables";
+@import "base/config";
+@import "base/fonts";
+
+@import "components/_mainPage";
+
+body {
+  font: {
+    size: $text;
+    family: "Inter";
+    weight: 500;
+  }
+  color: $white;
+  background: url("../resources/mainBG.png") $black;
+}
+
+.container {
+  width: 100%;
+  max-width: 1404px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
