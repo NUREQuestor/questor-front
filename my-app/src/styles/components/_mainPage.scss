@@ -1,0 +1,59 @@
+@import "_createQuest";
+@import "_availableQuest";
+
+.header__block {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 48px;
+  align-items: center;
+
+  .header__logo {
+    font: {
+      size: $logo;
+      weight: 700;
+    }
+    color: $white;
+  }
+
+  .header__button-quest {
+    color: $white;
+    font-weight: 700;
+  }
+
+  .header__search {
+    width: 336px;
+    height: 36px;
+    border-radius: 14px;
+    align-items: center;
+    background-image: url("../../resources/loupeIcon.svg");
+    background-repeat: no-repeat;
+    background-position: 4px;
+    padding-left: 60px;
+  }
+
+  .header-btn {
+    display: flex;
+
+    &__sign-in {
+      padding: 8px 40px;
+      margin-right: 10px;
+    }
+
+    &__register {
+      @extend .header-btn__sign-in
+    }
+  }
+}
+
+.btn {
+  border: 4px solid $white;
+  border-radius: 24px;
+  font-weight: 700;
+  color: $white;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $lightGrey;
+    transition: 1s ease-in-out;
+  }
+}
