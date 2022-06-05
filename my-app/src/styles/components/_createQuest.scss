@@ -1,0 +1,16 @@
+.main-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 150px;
+
+  &__title {
+    width: 800px;
+  }
+
+  &__btn {
+    padding: 8px 60px;
+  }
+}
+
