@@ -3,6 +3,7 @@ import className from "classnames"
 
 import SignIn from "./modals/SignIn"
 import Registration from "./modals/Registration"
+import SelectLocalization from "./SelectLocalization"
 
 const Header = () => {
 
@@ -19,9 +20,14 @@ const Header = () => {
                     <input type="text"
                         className="header__search"
                         placeholder="пошук квеста"/>
+
+                    <SelectLocalization />
+
                     <div className="header-btn">
+
                         <SignIn />
                         <Registration />
+                    
                     </div>
                 </div>
             </div>
