@@ -13,14 +13,23 @@ function Header() {
     //     margin-top: 25px;
     // )
 
-    const [open , setOpen] = useState(false)
+    const [openSignIn , setOpenSignIn] = useState(false)
+    const [openRegistration , setOpenRegistration] = useState(false)
 
-    const handleClose = () => {
-        setOpen(false)
+    const handleCloseSignIn = () => {
+        setOpenSignIn(false)
     }
 
-    const handleOpen = () => {
-        setOpen(true)
+    const handleOpenSignIn = () => {
+        setOpenSignIn(true)
+    }
+
+    const handleCloseRegistration = () => {
+        setOpenRegistration(false)
+    }
+
+    const handleOpenRegistration = () => {
+        setOpenRegistration(true)
     }
 
     return(
@@ -33,10 +42,10 @@ function Header() {
                         className="header__search"
                         placeholder="пошук квеста"/>
                     <div className="header-btn">
-                        <div className="header-btn__sign-in btn" onClick={handleOpen}>Увійти до системи</div>
+                        <div className="header-btn__sign-in btn" onClick={handleOpenSignIn}>Увійти до системи</div>
                         <Dialog
-                            open={open}
-                            onClose={handleClose}
+                            open={openSignIn}
+                            onClose={handleCloseSignIn}
                             aria-labelledby="signIn"
                         >
                             <DialogTitle>Увійти до системи</DialogTitle>
@@ -64,13 +73,58 @@ function Header() {
                                 </Typography>
                             </DialogContent>
                             <DialogActions>
-                                <Button сolor="error" onClick={handleClose}>Скасувати</Button>
-                                <Button color="success" onClick={handleClose} autoFocus>
+                                <Button сolor="error" onClick={handleCloseSignIn}>Скасувати</Button>
+                                <Button color="success" onClick={handleCloseSignIn} autoFocus>
                                     Увійти
                                 </Button>
                             </DialogActions>
                         </Dialog>
-                        <div className="header-btn__register btn">Зареєструватися</div>
+                        <div className="header-btn__register btn" onClick={handleOpenRegistration}>Зареєструватися</div>
+                        <Dialog
+                            open={openRegistration}
+                            onClose={handleCloseRegistration}
+                            aria-labelledby="registration"
+                        >
+                            <DialogTitle>Зареєструватися</DialogTitle>
+                            <DialogContent>
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="username"
+                                    label="Username"
+                                    type="name"
+                                    variant="standard"
+                                    fullWidth
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="registration-email"
+                                    label="Email Adress"
+                                    type="email"
+                                    variant="standard"
+                                    fullWidth
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="registration-password"
+                                    label="Password"
+                                    type="password"
+                                    variant="standard"
+                                    fullWidth
+                                />
+                                <Typography align="right" onClick={handleOpenSignIn}>
+                                    Увійти до системи
+                                </Typography>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button сolor="error" onClick={handleCloseRegistration}>Скасувати</Button>
+                                <Button color="success" onClick={handleCloseRegistration} autoFocus>
+                                    Зареєструватися
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
                     </div>
                 </div>
             </div>
