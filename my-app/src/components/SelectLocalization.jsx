@@ -1,4 +1,4 @@
-import {FormControl , Select , MenuItem} from "@mui/material"
+import {FormControl , Select , MenuItem , Box} from "@mui/material"
 import { useTranslation } from 'react-i18next';
 import { LANGUAGES } from "../constants"
 
@@ -10,15 +10,17 @@ const SelectLocalization = () => {
     }
 
     return(
-        <FormControl fullWidth>
-            <Select
-                value={i18n.language}
-                onChange={handleChange}
-            >
-                <MenuItem value={LANGUAGES.UA}>UA</MenuItem>
-                <MenuItem value={LANGUAGES.EN}>EN</MenuItem>
-            </Select>
-        </FormControl>
+        <Box sx={{ minWidth: 120 , backgroundColor: 'white' , borderRadius: "14px"}}>
+            <FormControl fullWidth>
+                <Select
+                    value={i18n.language}
+                    onChange={handleChange}
+                >
+                    <MenuItem value={LANGUAGES.UA}>UA</MenuItem>
+                    <MenuItem value={LANGUAGES.EN}>EN</MenuItem>
+                </Select>
+            </FormControl>
+        </Box>
     )
 }
 
