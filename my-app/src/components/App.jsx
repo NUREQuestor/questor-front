@@ -7,7 +7,7 @@ import "../styles/main.scss"
 
 import Header from "./Header"
 
-function App() {
+const App = () => {
   return (
     <div className="App">
         <Header/>

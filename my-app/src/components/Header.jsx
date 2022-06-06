@@ -3,7 +3,7 @@ import {Dialog ,DialogTitle , DialogContent , DialogActions , Button , TextField
 import {Link} from "react-router-dom"
 import className from "classnames"
 
-function Header() {
+const Header = () => {
     const listAvailableQuests = className(
         "header__button-quest"
     )
