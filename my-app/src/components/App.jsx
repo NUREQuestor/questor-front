@@ -1,7 +1,10 @@
 import {Routes , Route} from "react-router-dom"
 
-import CreateQuest from "../routing/CreateQuest"
+import MainInfo from "../routing/MainInfo"
 import AvailableQuest from "../routing/AvailableQuest"
+import Profile from "./profile/Profile"
+import Settings from "./profile/Settings"
+import Introduction from "./questsStart/Introduction"
 
 import "../styles/main.scss"
 
@@ -12,8 +15,10 @@ const App = () => {
     <div className="App">
         <Header/>
         <Routes>
-            <Route path="/" element={<CreateQuest />} />
-            <Route path="availableQuests" element={<AvailableQuest />} />
+            <Route path="/" element={<MainInfo />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/edit" element={<Settings />} />
+            <Route path="/сreate-quest" element={<Introduction />} />
         </Routes>
     </div>
   );

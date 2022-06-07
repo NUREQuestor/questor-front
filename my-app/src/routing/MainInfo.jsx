@@ -1,4 +1,4 @@
-function CreateQuest() {
+const CreateQuest = () => {
     return(
         <main>
             <section>
@@ -7,7 +7,6 @@ function CreateQuest() {
                         <h1 className="main-info__title">
                             Вбудовуйте свої завдання та пориньте у світ захоплюючого навчання. <br /> Веб-квест - це сайт в Інтернеті, з яким працюють учні, виконуючи те чи інше навчальне завдання.
                         </h1>
-                        <div className="main-info__btn btn">Створити квест?</div>
                     </div>
                 </div>
             </section>

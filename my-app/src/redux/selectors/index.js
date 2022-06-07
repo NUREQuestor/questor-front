@@ -1,1 +1,2 @@
-export const EMPTY = "EMPTY"
+export const getUser = (state) => state.user;
+

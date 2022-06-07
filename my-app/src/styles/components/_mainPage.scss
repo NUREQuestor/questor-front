@@ -31,6 +31,18 @@
     padding-left: 60px;
   }
 
+  .header__create-quest {
+    padding: 8px 50px;
+  }
+
+  .header__profile {
+    @extend .header__log-out
+  }
+
+  .header__log-out {
+    padding: 5px 20px;
+  }
+
   .header-btn {
     display: flex;
 
