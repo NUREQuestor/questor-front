@@ -1,5 +1,4 @@
 import {Link} from "react-router-dom"
-import className from "classnames"
 
 import FirstStep from "./modals/createQuest/FirstStep"
 import SignIn from "./modals/SignIn"
@@ -10,10 +9,6 @@ import { getUser } from "../redux/selectors";
 
 const Header = () => {
     const user = useSelector(getUser);
-
-    const listAvailableQuests = className(
-        "header__button-quest"
-    )
 
     return(
         <header className="header">
