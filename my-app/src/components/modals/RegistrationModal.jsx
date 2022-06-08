@@ -32,7 +32,7 @@ const RegistrationModal = () => {
 
     return(
         <>
-            <div className="header-btn__register btn" onClick={handleOpenRegistration}>{t("RegistrationModal")}</div>
+            <div className="header-btn__register btn" onClick={handleOpenRegistration}>{t("Registration")}</div>
             <Dialog
                 open={openRegistration}
                 onClose={handleCloseRegistration}

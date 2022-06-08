@@ -20,7 +20,7 @@ const Header = () => {
 
                     <SelectLocalization />
 
-                    {!user.id
+                    {user.id
                     ? ( <>
                             <Link to="/first_step_create" className="header__create-quest btn" >Створити квест</Link>
                             <Link to="/profile" className="header__profile btn">Профіль</Link>
