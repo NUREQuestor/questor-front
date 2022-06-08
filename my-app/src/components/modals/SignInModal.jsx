@@ -4,7 +4,7 @@ import {useFormik} from "formik"
 import {useDispatch} from "react-redux"
 import { CONFIG_TYPES } from "../../constants/types";
 
-const SignIn = () => {
+const SignInModal = () => {
     const dispatch = useDispatch()
 
     const [openSignIn , setOpenSignIn] = useState(false)
@@ -72,4 +72,4 @@ const SignIn = () => {
     )
 }
 
-export default SignIn
+export default SignInModal

@@ -1,5 +1,5 @@
-@import "_createQuest";
-@import "_availableQuest";
+@import "mainInfo";
+@import "quests";
 
 .header__block {
   display: flex;
@@ -20,7 +20,7 @@
     height: 36px;
     border-radius: 14px;
     align-items: center;
-    background-image: url("../../resources/loupeIcon.svg");
+    background-image: url("../../../resources/loupeIcon.svg");
     background-repeat: no-repeat;
     background-position: 4px;
     padding-left: 60px;
@@ -58,6 +58,7 @@
   font-weight: 700;
   color: $white;
   cursor: pointer;
+  display: block;
 
   &:hover {
     background-color: $lightGrey;

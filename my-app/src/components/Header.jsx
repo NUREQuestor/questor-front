@@ -1,8 +1,7 @@
 import {Link} from "react-router-dom"
 
-import FirstStep from "./modals/createQuest/FirstStep"
-import SignIn from "./modals/SignIn"
-import Registration from "./modals/Registration"
+import SignInModal from "./modals/SignInModal"
+import RegistrationModal from "./modals/RegistrationModal"
 import SelectLocalization from "./SelectLocalization"
 import { useSelector } from "react-redux";
 import { getUser } from "../redux/selectors";
@@ -21,16 +20,16 @@ const Header = () => {
 
                     <SelectLocalization />
 
-                    {!user.id 
+                    {!user.id
                     ? ( <>
-                            <FirstStep />
+                            <Link to="/first_step_create" className="header__create-quest btn" >Створити квест</Link>
                             <Link to="/profile" className="header__profile btn">Профіль</Link>
                             <div className="header__log-out btn">Вийти</div>
                         </>
                         )
                         : (<div className="header-btn">
-                            <SignIn />
-                            <Registration />
+                            <SignInModal />
+                            <RegistrationModal />
                         </div>)
                     }
                 </div>

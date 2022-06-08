@@ -1,0 +1,26 @@
+.profile {
+  .profile__block {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+
+    .profile__avatar {
+      width: 100px;
+      height: 100px;
+      align-content: center;
+      margin-right: 50px;
+    }
+
+    .info:nth-of-type(even) {
+      margin: 10px 0;
+    }
+
+    .profile__settings {
+      padding: 10px 50px;
+    }
+  }
+
+  .profile__title {
+    margin: 40px 0;
+  }
+}

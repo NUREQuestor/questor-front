@@ -5,7 +5,7 @@ import {useFormik} from "formik";
 import {useDispatch} from "react-redux"
 import { CONFIG_TYPES } from "../../constants/types";
 
-const Registration = () => {
+const RegistrationModal = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch()
     const [openRegistration , setOpenRegistration] = useState(false)
@@ -32,7 +32,7 @@ const Registration = () => {
 
     return(
         <>
-            <div className="header-btn__register btn" onClick={handleOpenRegistration}>{t("Registration")}</div>
+            <div className="header-btn__register btn" onClick={handleOpenRegistration}>{t("RegistrationModal")}</div>
             <Dialog
                 open={openRegistration}
                 onClose={handleCloseRegistration}
@@ -85,4 +85,4 @@ const Registration = () => {
     )
 }
 
-export default Registration
+export default RegistrationModal
