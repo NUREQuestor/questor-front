@@ -1,12 +1,16 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
-import { CONFIG_TYPES } from "../../constants/types";
+import { takeEvery, call, put, select } from 'redux-saga/effects';
+import { CONFIG_TYPES, USER_TYPES } from "../../constants/types";
+import { getConfigUserId } from "../selectors";
+import * as api from "../../api";
 
 const workerSignIn = function*({payload}) {
     try {
-        yield put({type: CONFIG_TYPES.SET_JWT_TOKEN, payload: {jwt: "sdfsdfvsdfhgbvsdjfnsafdkjhlksdlfbhaslkd"}})
+        const response = yield call(api.login, payload);
+        const { token, message } = response.data;
+        yield put({type: CONFIG_TYPES.SET_CONFIG, payload: {access: token, id: message}});
     }
     catch(e) {
-
+        console.log(e);
     }
 }
 
@@ -16,13 +20,77 @@ export const watchSignIn = function*() {
 
 const workerRegister = function*({payload}) {
     try {
-        yield put({type: CONFIG_TYPES.SET_JWT_TOKEN, payload: {jwt: "sdbjfjasdfbjas,dkbfkjasdbfnkjashbdfkjahsdf"}})
+        yield call(api.register, payload);
+        const response = yield call(api.login, payload);
+        const { token, message } = response.data;
+
+        yield put({type: CONFIG_TYPES.SET_CONFIG, payload: {access: token, id: message}});
     }
     catch(e) {
-
+        console.log(e);
     }
 }
 
 export const watchRegister = function*() {
     yield takeEvery(CONFIG_TYPES.REGISTER, workerRegister)
+}
+
+const workerMe = function*({payload}) {
+    try {
+        const response = yield call(api.getUser, payload);
+        const user = response.data;
+
+        yield put({type: USER_TYPES.SET, payload: {user}});
+    }
+    catch(e) {
+        console.log(e);
+    }
+}
+
+export const watchMe = function*() {
+    yield takeEvery(USER_TYPES.ME, workerMe);
+}
+
+const workerSignOut = function*() {
+    try {
+        yield put({type: USER_TYPES.REMOVE});
+        yield put({type: CONFIG_TYPES.CLEAR});
+    }
+    catch(e) {
+        console.log(e);
+    }
+}
+
+export const watchSignOut = function*() {
+    yield takeEvery(USER_TYPES.SIGN_OUT, workerSignOut);
+}
+
+const workerEdit = function*({payload, navigate}) {
+    try {
+        const userId = yield select(getConfigUserId);
+        yield call(api.editUser, userId, payload);
+        yield put({type: USER_TYPES.ME, payload:{ id: userId }});
+        yield call(navigate, "/profile");
+    }
+    catch(e) {
+        console.log(e);
+    }
+}
+
+export const watchEdit = function*() {
+    yield takeEvery(USER_TYPES.EDIT, workerEdit);
+}
+
+const workerEditPassword = function*({payload}) {
+    try {
+        const userId = yield select(getConfigUserId);
+        yield call(api.editPasswordUser, userId, payload);
+    }
+    catch(e) {
+        console.log(e);
+    }
+}
+
+export const watchEditPassword = function*() {
+    yield takeEvery(USER_TYPES.EDIT_PASSWORD, workerEditPassword);
 }

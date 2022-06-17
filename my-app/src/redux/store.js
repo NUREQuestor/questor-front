@@ -15,7 +15,7 @@ const createConfiguredStore = () => {
     {
         key: 'config',
         storage,
-        whitelist: ['config'],
+        whitelist: ['config', "user"],
     },
         rootReducer
     );

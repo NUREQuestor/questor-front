@@ -19,7 +19,7 @@ const SignInModal = () => {
     
     const {handleSubmit, handleChange} = useFormik({
         initialValues: {
-            email: "",
+            username: "",
             password: "",
         },
         onSubmit: (values) => {
@@ -41,10 +41,10 @@ const SignInModal = () => {
                     <TextField
                         autoFocus
                         margin="dense"
-                        id="email"
-                        name="email"
-                        label="Email Adress"
-                        type="email"
+                        id="username"
+                        name="username"
+                        label="User name"
+                        type="text"
                         variant="standard"
                         onChange={handleChange}
                         fullWidth

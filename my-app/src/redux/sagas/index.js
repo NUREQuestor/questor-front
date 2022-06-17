@@ -1,10 +1,16 @@
-import {all} from "redux-saga/effects"
-import {watchSignIn, watchRegister} from "./user";
+import {all, fork} from "redux-saga/effects"
+import * as userSaga from "./user";
+import * as questSaga from "./quest";
 
 const rootSaga = function*() {
     yield all([
-        watchSignIn(),
-        watchRegister()
+        fork(userSaga.watchSignIn),
+        fork(userSaga.watchRegister),
+        fork(userSaga.watchMe),
+        fork(userSaga.watchSignOut),
+        fork(userSaga.watchEdit),
+        fork(userSaga.watchEditPassword),
+        fork(questSaga.watchCreate)
     ])
 }
 
