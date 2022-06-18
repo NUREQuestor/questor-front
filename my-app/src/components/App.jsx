@@ -13,8 +13,9 @@ import LastStepCreate from "./createQuest/LastStepCreate";
 import IntroductionQuest from "./startQuest/IntroductionQuest"
 import CompletionQuest from "./startQuest/CompletionQuest"
 import ResultQuest from "./startQuest/ResultQuest";
-import { USER_TYPES } from "../constants/types";
+import { USER_TYPES, CREATED_QUESTS_TYPES } from "../constants/types";
 import { getConfigUserId } from "../redux/selectors";
+import PreviewQuest from "../components/createQuest/PreviewQuest"
 
 import "../styles/main.scss"
 
@@ -29,7 +30,8 @@ const App = () => {
 
   useEffect(() => {
     if(userId) {
-      dispatch({type: USER_TYPES.ME, payload: { id: userId }})
+      dispatch({type: USER_TYPES.ME, payload: { id: userId }});
+      dispatch({type: CREATED_QUESTS_TYPES.GET})
     }
     else {
       if(location !== "/") {
@@ -52,6 +54,7 @@ const App = () => {
           <Route path="/start_quest_introduction" element={<IntroductionQuest />} />
           <Route path="/completion-quest" element={<CompletionQuest />} />
           <Route path="/result-quest" element={<ResultQuest />} />
+          <Route path="/quest/:id/preview" element={<PreviewQuest />} />
         </Routes>
     </div>
   );

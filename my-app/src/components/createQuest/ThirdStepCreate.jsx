@@ -1,33 +1,83 @@
-import {Box, Button, TextField, Radio, RadioGroup, FormControlLabel, ButtonGroup} from "@mui/material"
+import { useEffect, Fragment, useMemo } from "react";
+import {Box, Button, TextField, Checkbox, FormControlLabel, ButtonGroup} from "@mui/material"
 import {useNavigate} from "react-router-dom";
+import { useFormik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { getConfigSettingsCreatedQuestion } from "../../redux/selectors";
+import { ANSWER_TYPES } from "../../constants/types";
+import { QUESTION_TYPE } from "../../constants" 
 
 const ThirdStepCreate = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { qeustionType } = useSelector(getConfigSettingsCreatedQuestion);
+
+    const { values, handleSubmit, handleChange, setFieldValue } = useFormik({
+        initialValues: {
+            answers: [
+                {
+                    value: "",
+                    isCorrect: Number(qeustionType) === QUESTION_TYPE.TextResponse
+                }
+            ]
+        },
+        onSubmit: (values) => {
+            dispatch({type: ANSWER_TYPES.CREATE_MANY, payload: values, navigate});
+        }
+    });
+
+    const hideIsCorrect = useMemo(() => {
+        if(Number(qeustionType) === QUESTION_TYPE.Quiz) {
+            return values.answers.some(({isCorrect}) => isCorrect);
+        }
+
+        return false;
+    }, [values, qeustionType]);
+
+
+    useEffect(() => {
+        if(values.answers[values.answers.length - 1].value && Number(qeustionType) !== QUESTION_TYPE.TextResponse) {
+            setFieldValue("answers", [...values.answers, {
+                value: "",
+                isCorrect: false
+            }])
+        }
+    }, [values.answers])
+
     return(
         <main>
             <section className="step-create">
                 <div className="container">
-                    <h2 className="step-create__title">Налаштування відповіді до 1 питання</h2>
+                    <h2 className="step-create__title">Налаштування відповіді до 1### питання</h2>
                     <Box sx={{width:400 , margin: "40px auto"}}>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="questName"
-                            name="questName"
-                            label="Quest name"
-                            type="text"
-                            variant="filled"
-                            sx={{background : "white" , borderRadius : "14px" , marginBottom : "14px"}}
-                            fullWidth
-                        />
-                        <RadioGroup
-                            name="radio-button-correct-answer"
-                        >
-                            <FormControlLabel value="public" control={<Radio />} label="Correct answer" />
-                        </RadioGroup>
+                        {
+                            values.answers.map((answer, index) => (
+                                <Fragment key={index}>
+                                    <TextField
+                                        autoFocus={false}
+                                        margin="dense"
+                                        id="questName"
+                                        name={`answers.${index}.value`}
+                                        label="Quest name"
+                                        type="text"
+                                        variant="filled"
+                                        sx={{background : "white" , borderRadius : "14px" , marginBottom : "14px"}}
+                                        onChange={handleChange}
+                                        value={values.answers[index].value}
+                                        fullWidth
+                                    />
+                                    {(!hideIsCorrect || values.answers[index].isCorrect) && <FormControlLabel 
+                                        name={`answers.${index}.isCorrect`} 
+                                        control={<Checkbox checked={values.answers[index].isCorrect}  />} 
+                                        onChange={handleChange} 
+                                        label="Correct answer" 
+                                    />}
+                                </Fragment>    
+                            ))       
+                        }
                         <ButtonGroup variant="outlined" sx={{marginTop: "40px" , display:"flex" , justifyContent:"space-between"}}>
                             <Button  variant="contained" onClick={() => navigate("/second_step_create")}>Повернутися</Button>
-                            <Button  variant="contained" onClick={() => navigate("/second_step_create")}>Наступний крок</Button>
+                            <Button  variant="contained" onClick={handleSubmit}>Наступний крок</Button>
                         </ButtonGroup>
                     </Box>
                 </div>

@@ -1,12 +1,11 @@
-import {LANGUAGES} from "../constants";
-
 const initialState = {
     config: {
-        lang: LANGUAGES
+        
     },
     user: {
         
-    }
-}
+    },
+    createdQuests: []
+};
 
 export default initialState

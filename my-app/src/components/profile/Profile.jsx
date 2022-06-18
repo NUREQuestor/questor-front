@@ -1,13 +1,16 @@
 import {Link} from "react-router-dom"
 
 import { useSelector } from "react-redux";
-import { getUser } from "../../redux/selectors";
+import { getUser, getCreatedQuests } from "../../redux/selectors";
 
 import avatar from "../../resources/avatar.png"
 import ProfileQuests from "./ProfileQuests"
 
 const Profile = () => {
     const user = useSelector(getUser);
+    const createdQuests = useSelector(getCreatedQuests);
+
+    console.log(createdQuests);
 
     return(
         <main>
@@ -28,7 +31,7 @@ const Profile = () => {
 
                     <h2 className="profile__title">Створені квести</h2>
 
-                    <ProfileQuests />
+                    <ProfileQuests quests={createdQuests} />
                 </div>
             </section>
         </main>

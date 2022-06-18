@@ -1,6 +1,6 @@
 import {Box , Button , TextField , Radio , RadioGroup , FormControlLabel , Checkbox } from "@mui/material"
 import { useDispatch } from "react-redux";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { QUEST_TYPES } from "../../constants/types";
 
@@ -17,9 +17,8 @@ const FirstStepCreate = () => {
             writeOffControlMode: false,
             timeLimit: 0
         },
-        onSubmit: async (values) => {
-            dispatch({type: QUEST_TYPES.CREATE, payload: values});
-            // navigate("/second_step_create")
+        onSubmit: (values) => {
+            dispatch({type: QUEST_TYPES.CREATE, payload: values, navigate});
         }
     });
 
@@ -57,7 +56,6 @@ const FirstStepCreate = () => {
                         />
                         <h3>Тип квесту</h3>
                         <RadioGroup
-                            defaultValue="public"
                             name="isPublic"
                             sx={{flexDirection:"row" , justifyContent:"space-between"}}
                             onChange={handleChange}
