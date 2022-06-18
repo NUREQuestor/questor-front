@@ -1,4 +1,6 @@
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
+import { Multiselect } from 'multiselect-react-dropdown';
+import { useState } from "react"
 
 import SignInModal from "./modals/SignInModal"
 import RegistrationModal from "./modals/RegistrationModal"
@@ -13,14 +15,23 @@ const Header = () => {
 
     const handleSignOut = () => dispatch({ type: USER_TYPES.SIGN_OUT })
 
+    const data = [
+        {quest : "test1"},
+        {quest : "test2"}
+    ]
+
+    const [options] = useState(data)
+
+
     return(
         <header className="header">
             <div className="container">
                 <div className="header__block">
                     <Link to="/" className="header__logo">Questor?</Link>
-                    <input type="text"
-                        className="header__search"
-                        placeholder="пошук квеста"/>
+                    <Multiselect
+                        placeholder="search"
+                        options={options}
+                        displayValue="quest" />
 
                     <SelectLocalization />
 

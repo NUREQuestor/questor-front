@@ -15,7 +15,7 @@
     color: $white;
   }
 
-  .header__search {
+  .searchWrapper {
     width: 336px;
     height: 36px;
     border-radius: 14px;
@@ -23,7 +23,24 @@
     background-image: url("../../../resources/loupeIcon.svg");
     background-repeat: no-repeat;
     background-position: 4px;
-    padding-left: 60px;
+    padding: 0px 30px;
+
+    .searchBox {
+      color: white;
+    }
+  }
+
+  .option {
+    color: black;
+
+    &:hover {
+      color: grey;
+      background: none;
+    }
+  } 
+  
+  .highlightOption {
+    background: white;
   }
 
   .header__create-quest {
