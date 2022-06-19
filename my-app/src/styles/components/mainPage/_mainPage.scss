@@ -15,32 +15,37 @@
     color: $white;
   }
 
-  .searchWrapper {
-    width: 336px;
-    height: 36px;
-    border-radius: 14px;
-    align-items: center;
-    background-image: url("../../../resources/loupeIcon.svg");
-    background-repeat: no-repeat;
-    background-position: 4px;
-    padding: 0px 30px;
+  .search-block {
+    position: relative;
 
-    .searchBox {
-      color: white;
+    .search-block__input {
+      width: 336px;
+      height: 36px;
+      border-radius: 14px;
+      align-items: center;
+      background-image: url("../../../resources/loupeIcon.svg");
+      background-repeat: no-repeat;
+      background-position: 4px;
+      padding-left: 60px;
     }
-  }
 
-  .option {
-    color: black;
-
-    &:hover {
-      color: grey;
-      background: none;
+    .search-block__result {
+      width: 336px;
+      height: auto;
+      background-color: white;
+      position: absolute;
+      top: 50px;
     }
-  } 
-  
-  .highlightOption {
-    background: white;
+    
+    .search-block__item {
+      color: black;
+      padding: 10px 20px;
+      cursor: pointer;
+
+      &:hover{
+        background-color: #edf4fb;
+      }
+    }
   }
 
   .header__create-quest {
