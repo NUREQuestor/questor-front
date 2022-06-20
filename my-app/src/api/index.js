@@ -23,3 +23,23 @@ export const getCreatedQuests = async (id) => instance.get("/Quest/QuestByUserId
         userId: id
     }
 });
+
+export const getPublicQuests = async () => instance.get("/Quest/PublicQuests");
+
+export const getQuest = async (id) => instance.get("/Quest", {
+    params: {
+        id
+    }
+});
+
+export const getQuestionsByQuest = async (id) => instance.get("/Question/QuestionsByQuestId", {
+    params: {
+        questId: id
+    }
+})
+
+export const getAnswersByQuestion = async (id) => instance.get("/Answer/AnswersByQuestionId", {
+    params: {
+        questionId: id
+    }
+});

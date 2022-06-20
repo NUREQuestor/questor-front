@@ -13,7 +13,7 @@ import LastStepCreate from "./createQuest/LastStepCreate";
 import IntroductionQuest from "./startQuest/IntroductionQuest"
 import CompletionQuest from "./startQuest/CompletionQuest"
 import ResultQuest from "./startQuest/ResultQuest";
-import { USER_TYPES, CREATED_QUESTS_TYPES } from "../constants/types";
+import { USER_TYPES, CREATED_QUESTS_TYPES, PUBLIC_QUESTS_TYPES } from "../constants/types";
 import { getConfigUserId } from "../redux/selectors";
 import PreviewQuest from "../components/createQuest/PreviewQuest"
 
@@ -31,12 +31,14 @@ const App = () => {
   useEffect(() => {
     if(userId) {
       dispatch({type: USER_TYPES.ME, payload: { id: userId }});
-      dispatch({type: CREATED_QUESTS_TYPES.GET})
+      dispatch({type: CREATED_QUESTS_TYPES.GET});
+      dispatch({type: PUBLIC_QUESTS_TYPES.GET});
     }
-    else {
-      if(location !== "/") {
-        navigate("/");
-      }
+  }, [userId])
+
+  useEffect(() => {
+    if(!userId && location !== "/") {
+      navigate("/");
     }
   }, [userId, location])
 
@@ -51,10 +53,11 @@ const App = () => {
           <Route path="/second_step_create" element={<SecondStepCreate />} />
           <Route path="/third_step_create" element={<ThirdStepCreate />} />
           <Route path="/last_step_create" element={<LastStepCreate />} />
-          <Route path="/start_quest_introduction" element={<IntroductionQuest />} />
           <Route path="/completion-quest" element={<CompletionQuest />} />
           <Route path="/result-quest" element={<ResultQuest />} />
           <Route path="/quest/:id/preview" element={<PreviewQuest />} />
+          <Route path="/quest/:id" element={<IntroductionQuest />} />
+          <Route path="/available_quests" element={<AvailableQuest />} />
         </Routes>
     </div>
   );

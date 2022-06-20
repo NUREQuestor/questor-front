@@ -24,7 +24,10 @@ export const USER_TYPES = {
 const questType = createType("QUEST"); 
  
 export const QUEST_TYPES = { 
-    CREATE: questType("CREATE") 
+    CREATE: questType("CREATE"),
+    SET: questType("SET"), 
+    GET: questType("GET"),
+    CLEAR: questType("CLEAR")
 } 
  
 const questionType = createType("QUESTION"); 
@@ -45,4 +48,12 @@ export const CREATED_QUESTS_TYPES = {
     SET: createdQuestsType("SET"), 
     GET: createdQuestsType("GET"),
     CLEAR: createdQuestsType("CLEAR")
+}
+
+const publicQuestsType = createType("PUBLIC_QUESTS");
+
+export const PUBLIC_QUESTS_TYPES = {
+    SET: publicQuestsType("SET"), 
+    GET: publicQuestsType("GET"),
+    CLEAR: publicQuestsType("CLEAR")
 }

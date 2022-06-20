@@ -18,6 +18,10 @@ const FirstStepCreate = () => {
             timeLimit: 0
         },
         onSubmit: (values) => {
+            const prepareValues = {
+                ...values,
+                isPublic: typeof values.isPublic === "string" ? values.isPublic === "true" : values.isPublic
+            }
             dispatch({type: QUEST_TYPES.CREATE, payload: values, navigate});
         }
     });

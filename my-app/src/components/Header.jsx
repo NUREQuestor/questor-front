@@ -1,17 +1,21 @@
-import { Link } from "react-router-dom"
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom"
 
 import SignInModal from "./modals/SignInModal"
 import RegistrationModal from "./modals/RegistrationModal"
 import SelectLocalization from "./SelectLocalization"
 import { useSelector, useDispatch } from "react-redux";
-import { getUser } from "../redux/selectors";
+import { getUser, getPublicQuestsWithSearch } from "../redux/selectors";
 import { USER_TYPES } from "../constants/types"
 
 const Header = () => {
     const dispatch = useDispatch()
     const user = useSelector(getUser);
+    const [search, setSearch] = useState("");
+    const publicQuests = useSelector(getPublicQuestsWithSearch(search));
+    const navigate = useNavigate();
 
-    const handleSignOut = () => dispatch({ type: USER_TYPES.SIGN_OUT })
+    const handleSignOut = () => dispatch({ type: USER_TYPES.SIGN_OUT });
 
     return(
         <header className="header">
@@ -21,11 +25,26 @@ const Header = () => {
                     <div className="search-block">
                         <input 
                             className="search-block__input"
-                            placeholder="search"/>
-                        <div className="search-block__result">
-                            <p className="search-block__item">test1</p>
-                            <p className="search-block__item">test2</p>
-                        </div>
+                            placeholder="search"
+                            onChange={(e) => setSearch(e.target.value)}
+                            value={search}
+                            onKeyDown={(e) => {
+                                if(e.key === "Enter") {
+                                    navigate("/available_quests", {
+                                        state: {
+                                            search
+                                        }
+                                    })
+                                    setSearch("");
+                                }
+                            }}
+                        />
+                        {search && <div className="search-block__result">
+                            {publicQuests.map(({id, name}) => <p className="search-block__item" key={id} onClick={() => {
+                                navigate(`/quest/${id}`);
+                                setSearch("");
+                            }}>{name}</p>)}
+                        </div>}
                     </div>
                     <SelectLocalization />
 

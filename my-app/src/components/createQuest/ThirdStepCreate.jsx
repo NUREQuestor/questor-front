@@ -1,4 +1,4 @@
-import { useEffect, Fragment, useMemo } from "react";
+import { Fragment, useMemo } from "react";
 import {Box, Button, TextField, Checkbox, FormControlLabel, ButtonGroup} from "@mui/material"
 import {useNavigate} from "react-router-dom";
 import { useFormik } from "formik";
@@ -34,16 +34,6 @@ const ThirdStepCreate = () => {
         return false;
     }, [values, qeustionType]);
 
-
-    useEffect(() => {
-        if(values.answers[values.answers.length - 1].value && Number(qeustionType) !== QUESTION_TYPE.TextResponse) {
-            setFieldValue("answers", [...values.answers, {
-                value: "",
-                isCorrect: false
-            }])
-        }
-    }, [values.answers])
-
     return(
         <main>
             <section className="step-create">
@@ -62,7 +52,15 @@ const ThirdStepCreate = () => {
                                         type="text"
                                         variant="filled"
                                         sx={{background : "white" , borderRadius : "14px" , marginBottom : "14px"}}
-                                        onChange={handleChange}
+                                        onChange={(e) => {
+                                            if(values.answers.length - 1 === index && Number(qeustionType) !== QUESTION_TYPE.TextResponse) {
+                                                setFieldValue("answers", [...values.answers, {
+                                                    value: "",
+                                                    isCorrect: false
+                                                }])
+                                            }
+                                            handleChange(e)
+                                        }}
                                         value={values.answers[index].value}
                                         fullWidth
                                     />

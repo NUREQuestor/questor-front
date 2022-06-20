@@ -1,42 +1,23 @@
-function AvailableQuest() {
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getPublicQuestsWithSearch } from "../redux/selectors";
+
+
+const AvailableQuest = () => {
+    const {state} = useLocation();
+    const navigate = useNavigate();
+    const publicQuests = useSelector(getPublicQuestsWithSearch(state.search));
+
     return(
         <main>
             <section className="available-quest">
                 <div className="container">
-                    <h2 className="available-quest__title">Доступні квести:</h2>
+                    <h2 className="available-quest__title">Доступні квести по запиту "{state.search}":</h2>
                     <div className="quests-block">
-                        <div className="quest-block">
-                            <p className="quest-block__text">Квест</p>
-                            <h3 className="quest-block__title">Назва</h3>
-                        </div>
-                        <div className="quest-block">
-                            <p className="quest-block__text">Квест</p>
-                            <h3 className="quest-block__title">Назва</h3>
-                        </div>
-                        <div className="quest-block">
-                            <p className="quest-block__text">Квест</p>
-                            <h3 className="quest-block__title">Назва</h3>
-                        </div>
-                        <div className="quest-block">
-                            <p className="quest-block__text">Квест</p>
-                            <h3 className="quest-block__title">Назва</h3>
-                        </div>
-                        <div className="quest-block">
-                            <p className="quest-block__text">Квест</p>
-                            <h3 className="quest-block__title">Назва</h3>
-                        </div>
-                        <div className="quest-block">
-                            <p className="quest-block__text">Квест</p>
-                            <h3 className="quest-block__title">Назва</h3>
-                        </div>
-                        <div className="quest-block">
-                            <p className="quest-block__text">Квест</p>
-                            <h3 className="quest-block__title">Назва</h3>
-                        </div>
-                        <div className="quest-block">
-                            <p className="quest-block__text">Квест</p>
-                            <h3 className="quest-block__title">Назва</h3>
-                        </div>
+                        {publicQuests.map(({id, name, description}) => <div key={id} className="quest-block" onClick={() => navigate(`/quest/${id}`)}>
+                            <p className="quest-block__text">{name}</p>
+                            <h3 className="quest-block__title">{description}</h3>
+                        </div>)}
                     </div>
                 </div>
             </section>

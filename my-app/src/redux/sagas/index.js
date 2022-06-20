@@ -4,6 +4,7 @@ import * as questSaga from "./quest";
 import * as questionSaga from "./question";
 import * as answerSaga from "./answer";
 import * as createdQuestsSaga from "./createdQuests";
+import * as publicQuestsSaga from "./publicQuests";
 
 const rootSaga = function*() {
     yield all([
@@ -14,9 +15,11 @@ const rootSaga = function*() {
         fork(userSaga.watchEdit),
         fork(userSaga.watchEditPassword),
         fork(questSaga.watchCreate),
+        fork(questSaga.watchGet),
         fork(questionSaga.watchCreate),
         fork(answerSaga.watchCreate),
-        fork(createdQuestsSaga.watchGet)
+        fork(createdQuestsSaga.watchGet),
+        fork(publicQuestsSaga.watchGet)
     ])
 }
 

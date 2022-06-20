@@ -5,7 +5,11 @@ const initialState = {
     user: {
         
     },
-    createdQuests: []
+    createdQuests: [],
+    publicQuests: [],
+    quest: {
+        
+    }
 };
 
 export default initialState
