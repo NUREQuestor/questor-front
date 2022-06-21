@@ -13,7 +13,7 @@ import LastStepCreate from "./createQuest/LastStepCreate";
 import IntroductionQuest from "./startQuest/IntroductionQuest"
 import CompletionQuest from "./startQuest/CompletionQuest"
 import ResultQuest from "./startQuest/ResultQuest";
-import { USER_TYPES, CREATED_QUESTS_TYPES, PUBLIC_QUESTS_TYPES } from "../constants/types";
+import { USER_TYPES } from "../constants/types";
 import { getConfigUserId } from "../redux/selectors";
 import PreviewQuest from "../components/createQuest/PreviewQuest"
 
@@ -22,7 +22,7 @@ import "../styles/main.scss"
 import Header from "./Header"
 
 const App = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,9 +30,7 @@ const App = () => {
 
   useEffect(() => {
     if(userId) {
-      dispatch({type: USER_TYPES.ME, payload: { id: userId }});
-      dispatch({type: CREATED_QUESTS_TYPES.GET});
-      dispatch({type: PUBLIC_QUESTS_TYPES.GET});
+      dispatch({type: USER_TYPES.ME, payload: { id: userId }});      
     }
   }, [userId])
 

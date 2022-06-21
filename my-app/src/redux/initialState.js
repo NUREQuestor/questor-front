@@ -6,6 +6,7 @@ const initialState = {
         
     },
     createdQuests: [],
+    completedQuests: [],
     publicQuests: [],
     quest: {
         

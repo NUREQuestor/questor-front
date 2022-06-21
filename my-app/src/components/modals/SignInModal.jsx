@@ -8,6 +8,7 @@ const SignInModal = () => {
     const dispatch = useDispatch()
 
     const [openSignIn , setOpenSignIn] = useState(false)
+    const [isError, setIsError] = useState(false);
     
     const handleCloseSignIn = () => {
         setOpenSignIn(false)
@@ -23,8 +24,7 @@ const SignInModal = () => {
             password: "",
         },
         onSubmit: (values) => {
-            dispatch({type: CONFIG_TYPES.SIGN_IN, payload: values});
-            handleCloseSignIn();
+            dispatch({type: CONFIG_TYPES.SIGN_IN, payload: values, setIsError, close: handleCloseSignIn});
         }
     })
 
@@ -66,6 +66,7 @@ const SignInModal = () => {
                     <Button color="success" onClick={handleSubmit} autoFocus>
                         Увійти
                     </Button>
+                    {isError ? <div>Error</div> : null}
                 </DialogActions>
             </Dialog>
         </>

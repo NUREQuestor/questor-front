@@ -3,14 +3,15 @@ import { CONFIG_TYPES, USER_TYPES } from "../../constants/types";
 import { getConfigUserId } from "../selectors";
 import * as api from "../../api";
 
-const workerSignIn = function*({payload}) {
+const workerSignIn = function*({payload, setIsError, close}) {
     try {
         const response = yield call(api.login, payload);
         const { token, message } = response.data;
         yield put({type: CONFIG_TYPES.SET_CONFIG, payload: {access: token, id: message}});
+        yield call(close);
     }
     catch(e) {
-        console.log(e);
+        yield call(setIsError, true)
     }
 }
 
@@ -18,16 +19,17 @@ export const watchSignIn = function*() {
     yield takeEvery(CONFIG_TYPES.SIGN_IN, workerSignIn);
 }
 
-const workerRegister = function*({payload}) {
+const workerRegister = function*({payload, setIsError, close}) {
     try {
         yield call(api.register, payload);
         const response = yield call(api.login, payload);
         const { token, message } = response.data;
 
         yield put({type: CONFIG_TYPES.SET_CONFIG, payload: {access: token, id: message}});
+        yield call(close);
     }
     catch(e) {
-        console.log(e);
+        yield call(setIsError, true)
     }
 }
 

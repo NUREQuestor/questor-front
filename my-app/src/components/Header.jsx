@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"
 
-import SignInModal from "./modals/SignInModal"
-import RegistrationModal from "./modals/RegistrationModal"
-import SelectLocalization from "./SelectLocalization"
+import SignInModal from "./modals/SignInModal";
+import RegistrationModal from "./modals/RegistrationModal";
+import SelectLocalization from "./SelectLocalization";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser, getPublicQuestsWithSearch } from "../redux/selectors";
-import { USER_TYPES } from "../constants/types"
+import { USER_TYPES, PUBLIC_QUESTS_TYPES } from "../constants/types";
 
 const Header = () => {
     const dispatch = useDispatch()
@@ -16,6 +16,10 @@ const Header = () => {
     const navigate = useNavigate();
 
     const handleSignOut = () => dispatch({ type: USER_TYPES.SIGN_OUT });
+
+    useEffect(() => {
+        dispatch({type: PUBLIC_QUESTS_TYPES.GET});
+    }, [!search.length])
 
     return(
         <header className="header">
@@ -50,7 +54,7 @@ const Header = () => {
 
                     {user.id
                     ? ( <>
-                            <Link to="/first_step_create" className="header__create-quest btn" >Створити квест</Link>
+                            <Link to="/first_step_create" state={{isCreate: true}} className="header__create-quest btn">Створити квест</Link>
                             <Link to="/profile" className="header__profile btn">Профіль</Link>
                             <div className="header__log-out btn" onClick={handleSignOut}>Вийти</div>
                         </>

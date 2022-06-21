@@ -1,6 +1,6 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
 import { QUEST_TYPES, CONFIG_TYPES } from "../../constants/types";
-import { getConfigUserId } from "../selectors";
+import { getConfigUserId, getConfigCreatedQuestId } from "../selectors";
 import * as api from "../../api";
 
 const workerCreate = function* ({payload, navigate}) {
@@ -8,8 +8,12 @@ const workerCreate = function* ({payload, navigate}) {
         const userId = yield select(getConfigUserId);
         const response = yield call(api.createQuest, userId, payload);
         const { message } = response.data;
-        yield put({type: CONFIG_TYPES.SET_CONFIG, payload: { idCreatedQuest: message }});
-        yield call(navigate, "/second_step_create");
+        yield put({type: CONFIG_TYPES.SET_CONFIG, payload: { idCreatedQuest: message, settingsCreatedQuest: payload, createdQuestions: [], idCreatedQuestion: null }});
+        yield call(navigate, "/second_step_create", {
+            state: {
+                isCreate: true
+            }
+        });
     }
     catch(e) {
         console.log(e);
@@ -18,6 +22,27 @@ const workerCreate = function* ({payload, navigate}) {
 
 export const watchCreate = function* () {
     yield takeEvery(QUEST_TYPES.CREATE, workerCreate);
+}
+
+const workerUpdate = function* ({payload, navigate}) {
+    try {
+        const userId = yield select(getConfigUserId);
+        const questId = yield select(getConfigCreatedQuestId);
+        yield call(api.updateQuest, questId, {userId, ...payload});
+        yield put({type: CONFIG_TYPES.SET_CONFIG, payload: { settingsCreatedQuest: payload }});
+        yield call(navigate, "/second_step_create", {
+            state: {
+                isCreate: true
+            }
+        });
+    }
+    catch(e) {
+        console.log(e);
+    }
+}
+
+export const watchUpdate = function* () {
+    yield takeEvery(QUEST_TYPES.UPDATE, workerUpdate);
 }
 
 const workerGet = function* ({payload}) {

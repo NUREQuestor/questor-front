@@ -13,7 +13,11 @@ const workerCreate = function* ({payload, navigate}) {
 
         }
     
-        yield call(navigate, "/second_step_create");
+        yield call(navigate, "/second_step_create", {
+            state: {
+                isCreate: true
+            }
+        });
     }
     catch(e) {
         console.log(e);

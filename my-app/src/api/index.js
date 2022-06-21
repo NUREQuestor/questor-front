@@ -43,3 +43,27 @@ export const getAnswersByQuestion = async (id) => instance.get("/Answer/AnswersB
         questionId: id
     }
 });
+
+export const createQuestResult = async (userId, questId, data) => instance.post("/QuestResult", {
+    userId,
+    questId,
+    ...data
+});
+
+export const getQuestResultByUser = async (id) => instance.get("/QuestResult/QuestsResultsForUser", {
+    params: {
+        userId: id
+    }
+});
+
+export const updateQuest = async (id, data) => instance.put("/Quest", data, {
+    params: {
+        questId: id
+    }
+})
+
+export const updateQuestion = async (id, data) => instance.put("/Question", data, {
+    params: {
+        questionId: id
+    }
+})

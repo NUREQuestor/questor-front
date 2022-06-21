@@ -27,13 +27,15 @@ export const QUEST_TYPES = {
     CREATE: questType("CREATE"),
     SET: questType("SET"), 
     GET: questType("GET"),
-    CLEAR: questType("CLEAR")
+    CLEAR: questType("CLEAR"),
+    UPDATE: questType("UPDATE")
 } 
  
 const questionType = createType("QUESTION"); 
  
 export const QUESTION_TYPES = { 
-    CREATE: questionType("CREATE") 
+    CREATE: questionType("CREATE"),
+    UPDATE: questionType("UPDATE")
 } 
  
 const answerType = createType("ANSWER"); 
@@ -50,10 +52,24 @@ export const CREATED_QUESTS_TYPES = {
     CLEAR: createdQuestsType("CLEAR")
 }
 
+const completedQuestsType = createType("COMPLETED_QUESTS"); 
+ 
+export const COMPLETED_QUESTS_TYPES = { 
+    SET: completedQuestsType("SET"), 
+    GET: completedQuestsType("GET"),
+    CLEAR: completedQuestsType("CLEAR")
+}
+
 const publicQuestsType = createType("PUBLIC_QUESTS");
 
 export const PUBLIC_QUESTS_TYPES = {
     SET: publicQuestsType("SET"), 
     GET: publicQuestsType("GET"),
     CLEAR: publicQuestsType("CLEAR")
+}
+
+const questResultType = createType("QUEST_RESULT");
+
+export const QUEST_RESULT_TYPES = {
+    CREATE: questResultType("CREATE")
 }

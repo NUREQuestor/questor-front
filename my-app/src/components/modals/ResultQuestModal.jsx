@@ -3,7 +3,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import {useState} from "react"
 
-const ResultQuestModal = () => {
+const ResultQuestModal = ({mark}) => {
     const [open, setOpen] = useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
@@ -29,8 +29,7 @@ const ResultQuestModal = () => {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Let Google help apps determine location. This means sending anonymous
-                        location data to Google, even when no apps are running.
+                        Ваша оцінка {mark}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

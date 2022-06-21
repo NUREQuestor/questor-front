@@ -17,8 +17,6 @@ const IntroductionQuest = () => {
         dispatch({ type: QUEST_TYPES.GET, payload: { id } }); 
     }, [id]) 
 
-    console.log(quest);
- 
     if(!quest.id) {
         return <div>loading</div> 
     } 

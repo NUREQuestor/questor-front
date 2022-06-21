@@ -8,7 +8,8 @@ import { CONFIG_TYPES } from "../../constants/types";
 const RegistrationModal = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch()
-    const [openRegistration , setOpenRegistration] = useState(false)
+    const [openRegistration , setOpenRegistration] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     const handleCloseRegistration = () => {
         setOpenRegistration(false)
@@ -25,8 +26,7 @@ const RegistrationModal = () => {
             password: "",
         },
         onSubmit: (values) => {
-            dispatch({type: CONFIG_TYPES.REGISTER, payload: values});
-            handleCloseRegistration();
+            dispatch({type: CONFIG_TYPES.REGISTER, payload: values, setIsError, close: handleCloseRegistration});
         }
     })
 
@@ -79,6 +79,7 @@ const RegistrationModal = () => {
                     <Button color="success" onClick={handleSubmit} autoFocus>
                         Зареєструватися
                     </Button>
+                    {isError ? <div>Error</div> : null}
                 </DialogActions>
             </Dialog>
         </>

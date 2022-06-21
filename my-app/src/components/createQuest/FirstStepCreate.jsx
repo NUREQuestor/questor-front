@@ -1,13 +1,15 @@
 import {Box , Button , TextField , Radio , RadioGroup , FormControlLabel , Checkbox } from "@mui/material"
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import { QUEST_TYPES } from "../../constants/types";
-
+import { getConfigSettingsCreatedQuest } from "../../redux/selectors";
 
 const FirstStepCreate = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { state } = useLocation();
+    const settingsQuest = useSelector(getConfigSettingsCreatedQuest);
 
     const {values, handleSubmit, handleChange} = useFormik({
         initialValues: {
@@ -15,14 +17,20 @@ const FirstStepCreate = () => {
             description: "",
             isPublic: true,
             writeOffControlMode: false,
-            timeLimit: 0
+            timeLimit: 0,
+            ...(state?.isCreate ? {} : settingsQuest)
         },
         onSubmit: (values) => {
             const prepareValues = {
                 ...values,
                 isPublic: typeof values.isPublic === "string" ? values.isPublic === "true" : values.isPublic
             }
-            dispatch({type: QUEST_TYPES.CREATE, payload: values, navigate});
+            if(state?.isCreate) {
+                dispatch({type: QUEST_TYPES.CREATE, payload: prepareValues, navigate});
+            }
+            else {
+                dispatch({type: QUEST_TYPES.UPDATE, payload: prepareValues, navigate});
+            }
         }
     });
 
@@ -69,7 +77,7 @@ const FirstStepCreate = () => {
                             <FormControlLabel control={<Radio />} value={false} label="private" />
                         </RadioGroup>
                         <FormControlLabel name="writeOffControlMode" control={<Checkbox checked={values.writeOffControlMode} />} onChange={handleChange} label="without cheating" />
-                        <h3>Час (хв)</h3>
+                        <h3>Час (сек)</h3>
                         <TextField
                             autoFocus
                             margin="dense"
