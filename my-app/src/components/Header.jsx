@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"
+import { useTranslation } from 'react-i18next';
 
 import SignInModal from "./modals/SignInModal";
 import RegistrationModal from "./modals/RegistrationModal";
@@ -9,6 +10,7 @@ import { getUser, getPublicQuestsWithSearch } from "../redux/selectors";
 import { USER_TYPES, PUBLIC_QUESTS_TYPES } from "../constants/types";
 
 const Header = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch()
     const user = useSelector(getUser);
     const [search, setSearch] = useState("");
@@ -54,9 +56,9 @@ const Header = () => {
 
                     {user.id
                     ? ( <>
-                            <Link to="/first_step_create" state={{isCreate: true}} className="header__create-quest btn">Створити квест</Link>
-                            <Link to="/profile" className="header__profile btn">Профіль</Link>
-                            <div className="header__log-out btn" onClick={handleSignOut}>Вийти</div>
+                            <Link to="/first_step_create" state={{isCreate: true}} className="header__create-quest btn">{t("CreateQuest")}</Link>
+                            <Link to="/profile" className="header__profile btn">{t("Profile")}</Link>
+                            <div className="header__log-out btn" onClick={handleSignOut}>{t("Exit")}</div>
                         </>
                         )
                         : (<div className="header-btn">

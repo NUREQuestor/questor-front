@@ -1,10 +1,12 @@
 import {useState} from "react"
+import { useTranslation } from 'react-i18next';
 import {Dialog ,DialogTitle , DialogContent , DialogActions , Button , TextField} from "@mui/material"
 import {useFormik} from "formik"
 import {useDispatch} from "react-redux"
 import { CONFIG_TYPES } from "../../constants/types";
 
 const SignInModal = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch()
 
     const [openSignIn , setOpenSignIn] = useState(false)
@@ -30,13 +32,13 @@ const SignInModal = () => {
 
     return(
         <>
-            <div className="header-btn__sign-in btn" onClick={handleOpenSignIn}>Увійти до системи</div>
+            <div className="header-btn__sign-in btn" onClick={handleOpenSignIn}>{t("SignIn")}</div>
             <Dialog
                 open={openSignIn}
                 onClose={handleCloseSignIn}
                 aria-labelledby="signIn"
                 >
-                <DialogTitle>Увійти до системи</DialogTitle>
+                <DialogTitle>{t("SignIn")}</DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus
@@ -62,9 +64,9 @@ const SignInModal = () => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button сolor="error" onClick={handleCloseSignIn}>Скасувати</Button>
+                    <Button сolor="error" onClick={handleCloseSignIn}>{t("Cancel")}</Button>
                     <Button color="success" onClick={handleSubmit} autoFocus>
-                        Увійти
+                    {t("Enter")}
                     </Button>
                     {isError ? <div>Error</div> : null}
                 </DialogActions>

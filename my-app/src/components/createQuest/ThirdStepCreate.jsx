@@ -1,6 +1,7 @@
 import { Fragment, useMemo } from "react";
 import {Box, Button, TextField, Checkbox, FormControlLabel, ButtonGroup} from "@mui/material"
 import {useNavigate} from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { getConfigSettingsCreatedQuestion, getCreatedQuestions } from "../../redux/selectors";
@@ -8,6 +9,7 @@ import { ANSWER_TYPES } from "../../constants/types";
 import { QUESTION_TYPE } from "../../constants" 
 
 const ThirdStepCreate = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { qeustionType } = useSelector(getConfigSettingsCreatedQuestion);
@@ -41,7 +43,7 @@ const ThirdStepCreate = () => {
         <main>
             <section className="step-create">
                 <div className="container">
-                    <h2 className="step-create__title">Налаштування відповіді до {createdQuestions.length} питання</h2>
+                    <h2 className="step-create__title">{t("SettingTheAnswerTo")} {createdQuestions.length} {t("Question")}</h2>
                     <Box sx={{width:400 , margin: "40px auto"}}>
                         {
                             values.answers.map((answer, index) => (
@@ -51,7 +53,7 @@ const ThirdStepCreate = () => {
                                         margin="dense"
                                         id="questName"
                                         name={`answers.${index}.value`}
-                                        label="Quest name"
+                                        label="Answer name"
                                         type="text"
                                         variant="filled"
                                         sx={{background : "white" , borderRadius : "14px" , marginBottom : "14px"}}
@@ -77,8 +79,8 @@ const ThirdStepCreate = () => {
                             ))       
                         }
                         <ButtonGroup variant="outlined" sx={{marginTop: "40px" , display:"flex" , justifyContent:"space-between"}}>
-                            <Button  variant="contained" onClick={() => navigate("/second_step_create")}>Повернутися</Button>
-                            {canNextStep ? <Button  variant="contained" onClick={handleSubmit}>Наступний крок</Button> : null}
+                            <Button  variant="contained" onClick={() => navigate("/second_step_create")}>{t("Return")}</Button>
+                            {canNextStep ? <Button  variant="contained" onClick={handleSubmit}>{t("NextStep")}</Button> : null}
                         </ButtonGroup>
                     </Box>
                 </div>

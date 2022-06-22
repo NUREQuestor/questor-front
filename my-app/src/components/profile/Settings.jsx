@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../redux/selectors";
 import { useFormik } from "formik";
+import { useTranslation } from 'react-i18next';
 import { USER_TYPES } from "../../constants/types";
 
 import ChangePassword from "../modals/ChangePassword"
 
 const Settings = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -56,8 +58,8 @@ const Settings = () => {
                             sx={{backgroundColor: "white"}}
                         />
                         <ChangePassword />
-                        <Button sx={{marginTop: "20px"}} variant="contained" onClick={handleSubmit}>Відредагувати</Button>
-                        <Button sx={{margin: "20px 0 0 20px"}} variant="outlined" onClick={() => navigate("/profile") }>Перейти до профілю</Button>
+                        <Button sx={{marginTop: "20px"}} variant="contained" onClick={handleSubmit}>{t("Edit")}</Button>
+                        <Button sx={{margin: "20px 0 0 20px"}} variant="outlined" onClick={() => navigate("/profile") }>{t("GoToProfile")}</Button>
                     </Box>
                 </div>
             </section>

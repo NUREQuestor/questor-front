@@ -1,10 +1,12 @@
 import {Box, Button, TextField, ButtonGroup} from "@mui/material"
 import {useNavigate} from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import { useSelector } from "react-redux";
 import { getConfigCreatedQuestId } from "../../redux/selectors";
 
 
 const LastStepCreate = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const questId = useSelector(getConfigCreatedQuestId);
 
@@ -12,7 +14,7 @@ const LastStepCreate = () => {
         <main>
             <section className="step-create">
                 <div className="container">
-                    <h2 className="step-create__title">Тепер ви можете надіслати всім посилання на свій квест, щоб люди могли зайти туди</h2>
+                    <h2 className="step-create__title">{t("LinkText")}</h2>
                     <Box sx={{width:400 , margin: "40px auto"}}>
                         <TextField
                             autoFocus
@@ -27,8 +29,8 @@ const LastStepCreate = () => {
                             value={`${window.location.origin}/quest/${questId}`}
                         />
                         <ButtonGroup variant="outlined" sx={{marginTop: "40px" , display:"flex" , justifyContent:"space-between"}}>
-                            <Button  variant="contained" onClick={() => navigate("/profile")}>Повернутися до профілю</Button>
-                            <Button  variant="contained" onClick={() => navigate(`/quest/${questId}/preview`)}>Подивитися квест</Button>
+                            <Button  variant="contained" onClick={() => navigate("/profile")}>{t("GoToProfile")}</Button>
+                            <Button  variant="contained" onClick={() => navigate(`/quest/${questId}/preview`)}>{t("WatchTheQuest")}</Button>
                         </ButtonGroup>
                     </Box>
                 </div>

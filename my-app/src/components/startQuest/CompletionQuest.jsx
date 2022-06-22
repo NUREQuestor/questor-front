@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect } from "react"; 
 import { Button, ButtonGroup, TextField, RadioGroup, FormControlLabel, Checkbox, Radio } from "@mui/material" 
-import { useNavigate, useLocation } from "react-router-dom"; 
+import { useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from 'react-i18next'; 
 import { useSelector, useDispatch } from "react-redux";  
 import { getQuest } from "../../redux/selectors"; 
 import { QUESTION_TYPE } from "../../constants"; 
@@ -11,7 +12,8 @@ const parseTime = (time) => {
     return time.toString().length === 1 ? `0${time}` : time;
 }
 
-const CompletionQuest = () => { 
+const CompletionQuest = () => {
+    const { t } = useTranslation(); 
     const dispatch = useDispatch(); 
     const navigate = useNavigate(); 
     const quest = useSelector(getQuest); 
@@ -154,10 +156,10 @@ const CompletionQuest = () => {
                                 indexQuestion: state.indexQuestion + 1, 
                                 mark: state.mark + computedMark 
                             } 
-                        })}>Наступне питання</Button>} 
+                        })}>{t("NextQuestion")}</Button>} 
                         <Button  variant="contained" onClick={() => { 
                             dispatch({type: QUEST_RESULT_TYPES.CREATE, payload: { mark: state.mark + computedMark, isCompleted: true }, navigate}); 
-                        }}>Завершити</Button> 
+                        }}>{t("End")}</Button> 
                     </ButtonGroup> 
                     <p>MARK: {computedMark}</p> 
                     <p>ALL MARK: {state.mark}</p> 

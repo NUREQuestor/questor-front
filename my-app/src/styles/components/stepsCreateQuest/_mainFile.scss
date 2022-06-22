@@ -1,4 +1,16 @@
-.step-create__title{
+.step-create__title {
   text-align: center;
   margin-top: 50px;
+}
+.preview__title {
+  margin: 50px 0 ;
+}
+.preview__question {
+  @extend .preview__title
+}
+.question-block__title ~ p {
+  margin: 30px 0;
+}
+.question-block__title {
+  margin-bottom: 30px
 }

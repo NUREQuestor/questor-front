@@ -1,5 +1,6 @@
 import {useEffect} from "react";
 import {Box, Button, TextField, ButtonGroup} from "@mui/material";
+import { useTranslation } from 'react-i18next';
 import {useNavigate, useParams} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getQuest } from "../../redux/selectors";
@@ -21,6 +22,7 @@ const codeTypeToString = (code) => {
 }
 
 const PreviewQuest = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch(); 
     const navigate = useNavigate();
     const {id} = useParams();
@@ -40,32 +42,33 @@ const PreviewQuest = () => {
         <main>
             <section className="preview">
                 <div className="container">
-                    <h2 className="preview__title">Тепер ви можете переглянути створенний квест</h2>
-                    <Box sx={{width:400 , margin: "40px auto"}}>
-                        <h3>{quest.name}</h3>
-                        <p>{quest.description}</p>
-                        <p>isPublic {quest.isPublic ? "YES" : "NO"}</p>
-                        <p>cheat {quest.writeOffControlMode ? "YES" : "NO"}</p>
-                        <p>time {quest.timeLimit}</p>
-                        <p>Питання</p>
+                    <h2 className="preview__title">{t("ViewTheCreatedQuest")}</h2>
+                    <Box>
+                        <h3 className="preview__heading">{t("Title")} {quest.name}</h3>
+                        <p className="preview__description">{t("Description")} {quest.description}</p>
+                        <p className="preview__public">{t("Public")} {quest.isPublic ? "YES" : "NO"}</p>
+                        <p className="preview__cheat">{t("Cheat")} {quest.writeOffControlMode ? "NO" : "Yes"}</p>
+                        <p className="preview__time">{t("Time")} {quest.timeLimit}</p>
+                        <h2 className="preview__question">{t("Question")}</h2>
                         {quest.questions.map((question) => (
-                            <div key={question.id}>
-                                <p>{question.title}</p>
+                            <div className="question-block" key={question.id}>
+                                <h3 className="question-block__title">{t("QuestionTitle")} {question.title}</h3>
                                 {question.linkTophoto ? <img 
                                     src={question.linkTophoto} 
-                                    alt="Картинка до питання" 
+                                    alt="Картинка до питання"
+                                    className="question-block__image" 
                                 /> : null}
-                                <p>points {question.pointsPerQuestion}</p>
-                                <p>type {codeTypeToString(question.qeustionType)}</p>
-                                <p>Відповіді</p>
+                                <p className="question-block__points">{t("Points")} {question.pointsPerQuestion}</p>
+                                <p className="question-block__type">{t("TypeQuestion")} {codeTypeToString(question.qeustionType)}</p>
+                                <h3 className="question-block__answers">{t("Answers")}</h3>
                                 {question.answers.map((answer) => (
-                                    <p>{answer.value} {answer.isCorrect && "(correct)"}</p>
+                                    <p className="question-block__answer">{answer.value} {answer.isCorrect && "(correct)"}</p>
                                 ))}
                             </div>
                         ))}
-                        <p>Посилання</p>
-                        <p>{window.origin}/quest/{quest.id}</p>
-                        <Button  variant="contained" onClick={() => navigate("/profile")}>Повернутися до профілю</Button>
+                        <p className="preview__links">{t("Link")}</p>
+                        <p className="preview__link">{window.origin}/quest/{quest.id}</p>
+                        <Button  sx={{marginTop: "30px"}} variant="contained" onClick={() => navigate("/profile")}>{t("GoToProfile")}</Button>
                     </Box>
                 </div>
             </section>

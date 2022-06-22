@@ -1,11 +1,13 @@
 import {Box , Button , TextField , Radio , RadioGroup , FormControlLabel , Checkbox } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import { QUEST_TYPES } from "../../constants/types";
 import { getConfigSettingsCreatedQuest } from "../../redux/selectors";
 
 const FirstStepCreate = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { state } = useLocation();
@@ -38,7 +40,7 @@ const FirstStepCreate = () => {
         <main>
             <section className="step-create">
                 <div className="container">
-                    <h2 className="step-create__title">Давайте подумаємо про налаштування квесту</h2>
+                    <h2 className="step-create__title">{t("Let'sThinkAboutSettingUpAQuest")}</h2>
                     <Box sx={{width:400 , margin: "40px auto"}}>
                         <TextField
                             autoFocus
@@ -66,7 +68,7 @@ const FirstStepCreate = () => {
                             value={values.description}
                             fullWidth
                         />
-                        <h3>Тип квесту</h3>
+                        <h3>{t("TypeQuest")}</h3>
                         <RadioGroup
                             name="isPublic"
                             sx={{flexDirection:"row" , justifyContent:"space-between"}}
@@ -77,7 +79,7 @@ const FirstStepCreate = () => {
                             <FormControlLabel control={<Radio />} value={false} label="private" />
                         </RadioGroup>
                         <FormControlLabel name="writeOffControlMode" control={<Checkbox checked={values.writeOffControlMode} />} onChange={handleChange} label="without cheating" />
-                        <h3>Час (сек)</h3>
+                        <h3>{t("Time")}</h3>
                         <TextField
                             autoFocus
                             margin="dense"
@@ -90,7 +92,7 @@ const FirstStepCreate = () => {
                             value={values.timeLimit}
                             fullWidth
                         />
-                        <Button variant="contained" onClick={handleSubmit}>Наступний крок</Button>
+                        <Button variant="contained" onClick={handleSubmit}>{t("NextStep")}</Button>
                     </Box>
                 </div>
             </section>

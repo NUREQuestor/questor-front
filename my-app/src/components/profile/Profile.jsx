@@ -1,14 +1,16 @@
 import {useEffect} from "react";  
 import {Link} from "react-router-dom" 
+import { useTranslation } from 'react-i18next';
  
 import { useSelector, useDispatch } from "react-redux"; 
 import { getUser, getCreatedQuests, getCompletedQuests } from "../../redux/selectors"; 
 import { CREATED_QUESTS_TYPES, COMPLETED_QUESTS_TYPES } from "../../constants/types"; 
  
-import avatar from "../../resources/avatar.png" 
+import profile from "../../resources/profile.jpg"  
 import ProfileQuests from "./ProfileQuests" 
  
 const Profile = () => { 
+    const { t } = useTranslation();
     const dispatch = useDispatch(); 
     const user = useSelector(getUser); 
     const createdQuests = useSelector(getCreatedQuests); 
@@ -24,19 +26,19 @@ const Profile = () => {
             <section className="profile"> 
                 <div className="container"> 
                     <div className="profile__block"> 
-                        <img className="profile__avatar" src={avatar} /> 
+                        <img className="profile__avatar" src={profile} /> 
                         <div className="profile__info"> 
-                            <h3 className="profile__name info">{user.userName}</h3> 
-                            <h3 className="profile__email info">{user.email}</h3> 
-                            <h3 className="profile__quantity info">Завершені квести: {completedQuests.length}</h3> 
-                            <Link to="/edit" className="profile__settings btn">Налаштування</Link> 
+                            <h3 className="profile__name info">{t("Name")} {user.userName}</h3> 
+                            <h3 className="profile__email info">{t("Email")} {user.email}</h3> 
+                            <h3 className="profile__quantity info">{t("CompletedQuests")} {completedQuests.length}</h3> 
+                            <Link to="/edit" className="profile__settings btn">{t("Settings")}</Link> 
                         </div> 
                     </div> 
-                    <h2 className="profile__title">Останні виконані завдання:</h2> 
+                    <h2 className="profile__title">{t("LastCompletedTasks")}:</h2> 
  
                     <ProfileQuests quests={completedQuests} /> 
  
-                    <h2 className="profile__title">Створені квести</h2> 
+                    <h2 className="profile__title">{t("CreatingQuests")}</h2> 
  
                     <ProfileQuests quests={createdQuests} isCreated /> 
                 </div> 

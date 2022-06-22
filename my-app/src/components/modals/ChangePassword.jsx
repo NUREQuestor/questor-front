@@ -1,11 +1,13 @@
 import {useState} from "react";
 import {useDispatch} from "react-redux";
+import { useTranslation } from 'react-i18next';
 import {Button , Dialog , DialogActions , DialogContent , TextField , DialogTitle} from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { USER_TYPES } from "../../constants/types";
 
 const ChangePassword = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
 
     const [open, setOpen] = useState(false);
@@ -32,14 +34,14 @@ const ChangePassword = () => {
 
     return (
         <div>
-            <Button sx={{width: "100%" , marginTop: "20px"}} variant="contained" onClick={handleClickOpen}>Змінити пароль</Button>
+            <Button sx={{width: "100%" , marginTop: "20px"}} variant="contained" onClick={handleClickOpen}>{t("ChangePassword")}</Button>
             <Dialog
                 fullScreen={fullScreen}
                 open={open}
                 onClose={handleClose}
             >
                 <DialogTitle id="responsive-dialog-title">
-                    Змінити пароль
+                {t("ChangePassword")}
                 </DialogTitle>
                 <DialogContent>
                         <TextField
@@ -55,9 +57,9 @@ const ChangePassword = () => {
                         />
                 </DialogContent>
                 <DialogActions>
-                    <Button variant="contained" onClick={handleConfirmChange}>Відредагувати</Button>
+                    <Button variant="contained" onClick={handleConfirmChange}>{t("Edit")}</Button>
                     <Button autoFocus onClick={handleClose}>
-                        Закрити
+                    {t("Cancel")}
                     </Button>
                 </DialogActions>
             </Dialog>

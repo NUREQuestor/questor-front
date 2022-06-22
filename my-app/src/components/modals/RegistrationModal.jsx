@@ -38,7 +38,7 @@ const RegistrationModal = () => {
                 onClose={handleCloseRegistration}
                 aria-labelledby="registration"
             >
-                <DialogTitle>Зареєструватися</DialogTitle>
+                <DialogTitle>{t("Registration")}</DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus
@@ -75,9 +75,9 @@ const RegistrationModal = () => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button сolor="error" onClick={handleCloseRegistration}>Скасувати</Button>
+                    <Button сolor="error" onClick={handleCloseRegistration}>{t("Cancel")}</Button>
                     <Button color="success" onClick={handleSubmit} autoFocus>
-                        Зареєструватися
+                        {t("CheckIn")}
                     </Button>
                     {isError ? <div>Error</div> : null}
                 </DialogActions>
